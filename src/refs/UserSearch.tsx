@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface User {
     name: string,
@@ -16,6 +16,11 @@ const UserSearch: React.FC = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [name, setName] = useState('');
   const [user, setUser] = useState<User | undefined>(undefined);
+
+  useEffect(() => {
+    if (!inputRef.current) return;
+    inputRef.current.focus();
+  }, []);
 
   const onClick = () => {
     const foundUser = users.find((user) => {
